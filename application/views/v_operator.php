@@ -15,6 +15,7 @@
                                 <th>Address</th>
                                 <th>Email</th>
                                 <th>Birthday</th>
+                                <th>Register Date</th>
                                 <th>Level</th>
                                 <th>Status</th>
                                 <th>Action</th>
@@ -30,14 +31,20 @@
                                 <td><?php echo $u->address ?></td>
                                 <td><?php echo $u->email ?></td>
                                 <td><?php echo $u->birthday ?></td>
+                                <td><?php echo $u->regisdate ?></td>
                                 <td><?php echo $u->level ?></td>
                                 <td><?php echo $u->status ?></td>
                                 <td>
                                     <a href="<?php if($u->status == "0"){echo base_url()."operator/verify?id=".$u->id;} ?>">
                                         <button <?php if($u->status == "1"){echo "disabled";} ?> class="btn btn-raised btn-primary">Verify</button>
                                     </a>
+
+                                    <a href="<?php if($this->session->userdata("level") == "0"){echo base_url()."admin/uplevel?id=".$u->id;} ?>">
+                                        <button <?php if(($u->level == "0")||($this->session->userdata("level") >= $u->level)){echo "disabled";} ?> class="btn btn-raised btn-primary">Uplevel</button>
+                                    </a>
+                                    
                                     <a href="<?php base_url(); ?>operator/delete?id=<?php echo $u->id ?>">
-                                        <button class="btn btn-raised btn-danger" >Delete</button>
+                                        <button <?php if(($this->session->userdata("level") >= $u->level)||($u->id == $this->session->userdata("id"))){echo "disabled";} ?> class="btn btn-raised btn-danger" >Delete</button>
                                     </a>
                                 </td>
                             </tr> 

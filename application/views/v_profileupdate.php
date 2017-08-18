@@ -70,15 +70,6 @@
 
 						            	<div class="col-xs-12">
 						            		<div class="col-xs-3">
-						                		<h4 class="list-group-item-text">Register Date :</h4>
-						                	</div>
-						                	<div class="col-xs-9">
-						                		<h4 class="list-group-item-text">2017-08-02</h4>
-						                	</div>
-						            	</div>
-
-						            	<div class="col-xs-12">
-						            		<div class="col-xs-3">
 						                		<h4 class="list-group-item-text">Email :</h4>
 						                	</div>
 						                	<div class="col-xs-9">

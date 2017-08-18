@@ -23,7 +23,7 @@ class operator extends CI_Controller {
 		if($this->session->userdata("level") == "1" || $this->session->userdata("level") == "0")
 		{
 			$this->load->model('m_operator');
-			$data['operator'] = $this->m_operator->view_data()->result();
+			$data['operator'] = $this->m_operator->select_data()->result();
 			$view['title'] = "E-Library | Operator";
 	    	$view['menu'] = "operator";
 	    	$view['isi'] = $this->load->view('v_operator',$data, TRUE);
@@ -59,14 +59,21 @@ class operator extends CI_Controller {
 		if($this->session->userdata("level") == "1" || $this->session->userdata("level") == "0")
 		{
 			$this->load->model('m_operator');
-			//$idd = $data['query']->row()->no;
 			$id = $this->input->get("id", true);
-	        $this->m_operator->delete_data('tb_user', $id);
-	        redirect(base_url()."operator");
+			$data['query'] = $this->m_operator->get_data($this->session->userdata("id"));
+			$lvl = $data['query']->row()->level;
+			$idd = $data['query']->row()->id;
+			if(($this->session->userdata("level") <= $lvl)||($id == $idd))
+			{
+		        $this->m_operator->delete_data('tb_user', $id);
+		        //redirect(base_url()."operator");
+			}
+			redirect(base_url()."operator");
 	    }
 	    else
 		{
 			redirect(base_url()."main/login");
 		}
 	}
+	
 }

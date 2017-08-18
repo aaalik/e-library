@@ -39,12 +39,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="navbar-collapse collapse navbar-responsive-collapse">
             	<ul class="nav navbar-nav">
                   	<li class="<?php if($menu=="home"){echo "active";} ?>"><a href="<?php echo base_url(); ?>">Home</a></li>
+
                   	<?php if($this->session->userdata("loggedin")=="true"){ ?>
                   	<li class="<?php if($menu=="profile"){echo "active";} ?>"><a href="<?php echo base_url(); ?>user/profile">Profile</a></li>
                   	<?php } ?>
+
                   	<?php if($this->session->userdata("loggedin")=="true" && $this->session->userdata("level") != "2"){ ?>
                   	<li class="<?php if($menu=="operator"){echo "active";} ?>"><a href="<?php echo base_url(); ?>operator">Operator</a></li>
                   	<?php } ?>
+
+                  	<?php if($this->session->userdata("level")=="0"){ ?>
+                  	<li class="<?php if($menu=="admin"){echo "active";} ?>"><a href="<?php echo base_url(); ?>admin">Admin</a></li>
+                  	<?php } ?>
+
                   	<li class="<?php if($menu=="contact"){echo "active";} ?>"><a href="javascript:void(0)">Contact</a></li>
                   	<li class="<?php if($menu=="help"){echo "active";} ?>"><a href="javascript:void(0)">Help</a></li>
                 </ul>

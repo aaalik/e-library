@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class main extends CI_Controller {
+class admin extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -20,45 +20,26 @@ class main extends CI_Controller {
 	 */
 	function __construct(){
         parent::__construct();      
-        $this->load->model('m_main');
+        $this->load->model('m_admin');
     }
 
 	public function index()
 	{
-		if($this->session->userdata("loggedin")=="true")
+		if($this->session->userdata("level")=="0")
 		{
-			$view['title'] = "E-Library | Home";
-	    	$view['menu'] = "home";
-	    	$view['isi'] = $this->load->view('v_home', '', TRUE);
-			$this->load->view('v_main', $view);
-		}
-		else
-		{
-			redirect(base_url()."main/login");
-		}
-	}
-
-	public function register()
-	{
-		if($this->session->userdata("loggedin")=="true")
-		{
-			redirect(base_url());
-		}
-		else
-		{
-			$view['title'] = "E-Library | Register";
-	    	$view['menu'] = "home";
+			$view['title'] = "E-Library | Admin";
+	    	$view['menu'] = "admin";
 
 	    	$name = $this->input->post('name');
 	    	$address = $this->input->post('address');
 	    	$email = $this->input->post('email');
 	    	$password = $this->input->post('password');
 	    	$birthday = $this->input->post('birthday');
-	    	$status = '0';
-	    	$level = '2';
+	    	$status = "0";
+	    	$level = $this->input->post('level');
 	    	$nowd = date("Y-m-d");
 	    	$date = substr($nowd,2,2).substr($nowd,5,2);
-	    	$getcd = $this->m_main->count($date);
+	    	$getcd = $this->m_admin->count($date);
 	    	$count = $getcd->num_rows();
 			$cd_user = $date.sprintf("%03d", ($count+1));
 	    	$data = array(
@@ -129,76 +110,38 @@ class main extends CI_Controller {
                 	'regisdate' => $data['regisdate']
                 );
 
-                $this->m_main->register($data, 'tb_user');
-                redirect(base_url());
+                $this->m_admin->add_user($data, 'tb_user');
+                redirect(base_url()."operator");
             }
 
-	    	$view['isi'] = $this->load->view('v_register', $data, TRUE);
+			$view['isi'] = $this->load->view('v_admin', $data, TRUE);
 			$this->load->view('v_main', $view);
-		}
-	}
-
-	public function login()
-	{
-		if($this->session->userdata("loggedin")=="true")
-		{
-			echo "dah";
-			redirect(base_url());
 		}
 		else
 		{
-			$view['title'] = "E-Library | Login";
-    		$view['menu'] = "home";
-			$data2['email'] = $this->input->post("email",true);
-			$data2['pass'] = $this->input->post("pass",true);
-			$data2['gagal']="";
-
-			$config = array(
-	        array(
-	                'field' => 'email',
-	                'label' => 'Email',
-	                'rules' => 'required',
-	                'errors' => array(
-	                        'required' => '%s wajib diisi.',
-	                ),
-	        ),
-	        array(
-	                'field' => 'pass',
-	                'label' => 'Password',
-	                'rules' => 'required',
-	                'errors' => array(
-	                        'required' => '%s wajib diisi.',
-	                ),
-	        	)
-			);
-			$this->form_validation->set_rules($config);
-			if ($this->form_validation->run() == TRUE)
-			{
-				$cek_user = $this->m_main->login($data2['email'], $data2['pass']);
-				if($cek_user->num_rows()>0)
-				{
-					$this->session->set_userdata("loggedin", "true");
-					$this->session->set_userdata("level", $cek_user->row()->level);
-					$this->session->set_userdata("name", $cek_user->row()->name);
-					$this->session->set_userdata("id", $cek_user->row()->id);
-					//echo "berhasil";
-					redirect(base_url());
-				}
-				else
-				{
-					$data2['gagal']="Email atau password tidak ditemukan";
-				}
-			}
-
-			$view['isi'] = $this->load->view('v_login', $data2, TRUE);
-			$this->load->view('v_main', $view);
+			redirect(base_url()."main/login");
 		}
-		//$this->load->view('v_login');
+	}//end of index func
+
+	public function uplevel()
+	{
+		if($this->session->userdata("level") == "0")
+		{
+			$id = $this->input->get("id", true);
+			$data['query'] = $this->m_admin->get_data($id);
+			$lvl = $data['query']->row()->level;
+			//$lvls = (int)$lvl -1;
+			$lvl = (string)((int)$lvl-1);
+			$data = array(
+		        'level' => $lvl
+			);
+	        $this->m_admin->update_data($data, 'tb_user', $id);
+	        redirect(base_url()."operator");
+	    }
+	    else
+		{
+			redirect(base_url()."main/login");
+		}
 	}
 
-	public function logout()
-	{
-		session_destroy();
-		redirect(base_url()."main/login");
-	}
-}
+}//last bracket

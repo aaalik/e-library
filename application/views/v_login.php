@@ -20,6 +20,7 @@
 							  	<label class="control-label" for="focusedInput2">Password</label>
 							  	<input class="form-control" id="focusedInput2" type="password" value="<?php echo $pass ?>" name="pass">
 							  	<p class="help-block">Write your password correctly</p>
+							  	<br/>
 							  	<?php echo form_error('pass', '<div class="error fonterror">', '</div>'); ?>
 							</div>
 

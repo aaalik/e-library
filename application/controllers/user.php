@@ -32,7 +32,7 @@ class user extends CI_Controller {
 			redirect(base_url()."main/login");
 		}
 	}
-
+	
 	public function profile()
 	{
 		if($this->session->userdata("loggedin")=="true")
@@ -47,6 +47,7 @@ class user extends CI_Controller {
 			$data['name'] = $data['query']->row()->name;
 			$data['address'] = $data['query']->row()->address;
 			$data['birthday'] = $data['query']->row()->birthday;
+			$data['regisdate'] = $data['query']->row()->regisdate;
 			$data['email'] = $data['query']->row()->email;
 
 	    	$view['isi'] = $this->load->view('v_profile', $data, TRUE);

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 11, 2017 at 06:19 PM
+-- Generation Time: Aug 19, 2017 at 07:02 PM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 5.6.19
 
@@ -34,6 +34,7 @@ CREATE TABLE `tb_user` (
   `email` text NOT NULL,
   `pass` text NOT NULL,
   `birthday` date NOT NULL,
+  `regisdate` date NOT NULL,
   `level` tinyint(1) NOT NULL,
   `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -42,9 +43,10 @@ CREATE TABLE `tb_user` (
 -- Dumping data for table `tb_user`
 --
 
-INSERT INTO `tb_user` (`id`, `cd_user`, `name`, `address`, `email`, `pass`, `birthday`, `level`, `status`) VALUES
-(1, 17081, 'Abdul Malik', 'Bogor', 'anothermalik@gmail.com', 'alik', '1996-01-01', 0, 1),
-(2, 1708001, 'Haris Manap', 'Jakarta', 'harismanap@gmail.com', 'manap', '1996-04-15', 2, 1);
+INSERT INTO `tb_user` (`id`, `cd_user`, `name`, `address`, `email`, `pass`, `birthday`, `regisdate`, `level`, `status`) VALUES
+(1, 1708001, 'Abdul Malik MS', 'Bogor', 'anothermalik@gmail.com', 'alik', '1996-01-01', '2017-08-01', 0, 1),
+(17, 1708002, 'Haris Manaf', 'Jakarta', 'harismanap@gmail.com', 'manap', '1996-04-05', '2017-08-17', 1, 1),
+(18, 1708003, 'Ujang', 'Bogor', 'ujang@gmail.com', 'ujang', '1996-08-15', '2017-08-17', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -85,7 +87,7 @@ ALTER TABLE `tb_user`
 -- AUTO_INCREMENT for table `tb_user`
 --
 ALTER TABLE `tb_user`
-  MODIFY `id` smallint(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` smallint(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -9,7 +9,7 @@
 			</div>
 
 			<div class="well col-xs-10 col-xs-offset-1">
-				<form class="form-horizontal" method="post" action="">
+				<form class="form-horizontal" method="post" action="" enctype="multipart/form-data">
 					<fieldset>
 						<legend>Add Book</legend>
 
@@ -50,7 +50,7 @@
 						</div>
 
 						<div class="col-xs-offset-10">
-                  			<input type="submit" value="Submit" class="btn btn-primary"/>
+                  			<input type="submit" name="submit" value="Submit" class="btn btn-primary"/>
                 		</div>
 					</fieldset>
 				</form>

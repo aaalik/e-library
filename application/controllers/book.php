@@ -125,7 +125,6 @@ class book extends CI_Controller {
 	    $author = $this->input->post('author');
 	    $year = $this->input->post('year');
         $description = $this->input->post('description');
-        // $img_name = $this->upload->data('file_name');
 	    $img_dname = $this->input->post('birthday');
 	    $data = array(
             'title' => $title,
@@ -133,10 +132,6 @@ class book extends CI_Controller {
             'year' => $year,
             'description' => $description
         );
-
-        // $config['upload_path'] = './asset/uploads/';
-		// $config['allowed_types'] = 'gif|jpg|png|jpeg';
-        // $config['encrypt_name'] = true;
         $config = array(
             array(
                 'field' => 'title',
@@ -170,57 +165,36 @@ class book extends CI_Controller {
                     'required' => '%s must be filled.',
                 )
             )
-        );
-        $config1['upload_path'] = './asset/uploads/';
-        $config1['allowed_types'] = 'gif|jpg|png|jpeg';
-        $config1['encrypt_name'] = true;
-    
-        $this->load->library('upload', $config1);
-        if(!$this->upload->do_upload('img_name')){
-            echo "<script>alert('File Harus Gambar');</script>";
-        }else{
+        );    
+     
+        if($this->input->post('submit')){
             $this->form_validation->set_rules($config);
             if ($this->form_validation->run() == TRUE)
             {
-                $img_name = $this->upload->data('file_name');
-                $data = array(
-                    'title' => $data['title'],
-                    'author' => $data['author'],
-                    'year' => $data['year'],
-                    'description' => $data['description'],
-                    'img_name' => $img_name
-                );
-                $this->m_book->add_book($data, 'tb_book');
-                redirect(base_url('book'));
+                $config1['upload_path'] = './asset/uploads/';
+                $config1['allowed_types'] = 'gif|jpg|png|jpeg';
+                $config1['encrypt_name'] = true;
+                $this->load->library('upload', $config1);
+                
+                
+                if($this->upload->do_upload('img_name'))
+                {
+                    $uploadData = $this->upload->data();
+                    $uploadedFile = $uploadData['file_name'];
+                    $data = array(
+                        'title' => $data['title'],
+                        'author' => $data['author'],
+                        'year' => $data['year'],
+                        'description' => $data['description'],
+                        'img_name' => $uploadedFile
+                    );
+                    $this->m_book->add_book($data, 'tb_book');
+                    redirect(base_url('book'));            
+                }
             }
         }
-	    // $this->form_validation->set_rules($config);
-        // if ($this->form_validation->run() == TRUE)
-        // {
-        //     // $config1['upload_path'] = './asset/uploads/';
-		//     // $config1['allowed_types'] = 'gif|jpg|png|jpeg';
-        //     // $config1['encrypt_name'] = true;
-		
-        //     // $this->load->library('upload', $config1);
-        //     // if(!$this->upload->do_upload('img_name')){
-		// 	//     echo "<script>alert('File Harus Gambar');</script>";
-		//     // }else{
-        //         // do here
-        //         $img_name = $this->upload->data('file_name');
-        //         $data = array(
-        //             'title' => $data['title'],
-        //             'author' => $data['author'],
-        //             'year' => $data['year'],
-        //             'description' => $data['description'],
-        //             'img_name' => $img_name
-        //         );
-        //         $this->m_book->add_book($data, 'tb_book');
-        //         redirect(base_url('book'));
-        //     // }
-            
-        // }
 
         $view['isi'] = $this->load->view('v_bookadd', $data, TRUE);
 		$this->load->view('v_main', $view);
-	}
+    }
 }

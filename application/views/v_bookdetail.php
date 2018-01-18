@@ -18,7 +18,7 @@
 						    <div class="list-group">
 						    	<div class="list-group-item">
 						            <div class="row-picture col-xs-1">
-						                <img class="circle " src="http://localmarketingplus.ca/wp-content/uploads/2015/02/blue-head.jpg" alt="icon" style="width: 200px; height: 200px;">
+						                <img class="" src="<?php echo base_url('asset/uploads/'.$img_name)?>" alt="icon" style="width: 200px; height: 200px;">
 						            </div>
 						            
 					            </div>

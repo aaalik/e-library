@@ -3,14 +3,14 @@
 			<div class="row">
 				<div class="col-xs-12">
 					<div class="page-header">
-						<h1 id="type">User</h1>
+						<h1 id="type">Book</h1>
 					</div>
 				</div>
 			</div>
 
 			<div class="panel panel-primary">
 			  	<div class="panel-heading">
-			    	<h3 class="panel-title">Profile</h3>
+			    	<h3 class="panel-title">Book's Detail</h3>
 			  	</div>
 			  	<div class="panel-body">
 			  		<div class="row">
@@ -69,8 +69,8 @@
 						                </div>
 						            </div>
 						            <div class="col-xs-offset-10">
-						            	<a href="<?php base_url(); ?>update">
-                  							<button type="submit" class="btn btn-raised btn-primary">Update</button>
+						            	<a href="<?php echo base_url()."book/edit_book?id=".$book_id; ?>">
+                  							<button type="submit" class="btn btn-raised btn-primary">Edit</button>
                   						</a>
                 					</div>
 					            </div>

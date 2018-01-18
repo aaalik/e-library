@@ -11,5 +11,15 @@
       return $query;
     }
 
+    function add_book($data, $table)
+    {
+      $this->db->insert($table,$data);
+    }
+
+    function edit_book($data,$table,$id){
+      $this->db->where("book_id",$id);
+      $x = $this->db->update($table,$data);
+    }
+
   }
 ?>

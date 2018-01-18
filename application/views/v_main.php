@@ -14,7 +14,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons">
 
   	<!-- Bootstrap -->
-  	<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>asset/css/bootstrap.min.css">
 
   	<!-- Bootstrap Material Design -->
   	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>asset/css/bootstrap-material-design.css">
@@ -62,15 +62,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   	</div>
                 </form>
                 <ul class="nav navbar-nav navbar-right">
+					<?php if($this->session->userdata("loggedin") == null){ ?>
+					<li><a href="<?php echo base_url(); ?>">Login</a></li>
+					<?php }else{ ?>
                 	<li class="dropdown">
-                    	<a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown"><?php if($this->session->userdata("loggedin")=="true"){echo $this->session->userdata("name");}else{echo "Login";} ?><b class="caret"></b></a>
+                    	<a href="/" data-target="#" class="dropdown-toggle" data-toggle="dropdown"><?php if($this->session->userdata("loggedin")=="true"){echo $this->session->userdata("name");}else{echo "Login";} ?><b class="caret"></b></a>
                     	<?php if($this->session->userdata("loggedin")=="true"){?>
                     	<ul class="dropdown-menu">
-                    		
                     		<li><a href="<?php echo base_url(); ?>main/logout">Logout</a></li>
                     	</ul>
                     	<?php } ?>
                   	</li>
+					<?php } ?>
                 </ul>
             </div>
         </div>

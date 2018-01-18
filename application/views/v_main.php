@@ -52,6 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   	<li class="<?php if($menu=="admin"){echo "active";} ?>"><a href="<?php echo base_url(); ?>admin">Admin</a></li>
                   	<?php } ?>
 
+                  	<li class="<?php if($menu=="book"){echo "active";} ?>"><a href="<?php echo base_url('book'); ?>">Book</a></li>
                   	<li class="<?php if($menu=="contact"){echo "active";} ?>"><a href="javascript:void(0)">Contact</a></li>
                   	<li class="<?php if($menu=="help"){echo "active";} ?>"><a href="javascript:void(0)">Help</a></li>
                 </ul>

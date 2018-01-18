@@ -18,6 +18,12 @@ class user extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+
+	function __construct(){
+        parent::__construct();      
+        $this->load->model('m_admin');
+    }
+    
 	public function index()
 	{
 		if($this->session->userdata("loggedin")=="true")

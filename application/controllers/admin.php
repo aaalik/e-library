@@ -21,6 +21,7 @@ class admin extends CI_Controller {
 	function __construct(){
         parent::__construct();      
         $this->load->model('m_admin');
+        $this->load->model('m_main');
     }
 
 	public function index()

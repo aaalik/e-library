@@ -19,7 +19,6 @@ class book extends CI_Controller {
     public function detail()
     {
         $id = $this->input->get("id", true);
-        echo $id;
 		$data['query'] = $this->m_book->detail_book($id);
 		$data['book_id'] = $data['query']->row()->book_id;
 		$data['title_book'] = $data['query']->row()->title;
